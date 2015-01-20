@@ -32,23 +32,13 @@
     function onCreate(){
           var hrac;
           var velikostTlacitka;
-          if(window.innerHeight < window.innerWidth){
+          if(window.screen.availHeight < window.screen.availWidth){
           //naležato
-             velikostTlacitka= window.innerHeight / 6;
-             document.getElementById("okno").style.width = window.screen.availWidth+"px";
-             document.getElementById("okno").style.height = window.screen.availHeight+"px";
-             document.getElementById("layout").style.width = window.screen.availWidth+"px";
-             document.getElementById("layout").style.height = window.screen.availHeight+"px";
-             document.getElementById("layout").style.verticalAlign = "middle";                
-           }else{
+             velikostTlacitka= window.innerHeight / 7;               
+           }else if (window.screen.availHeight > window.screen.availWidth){
            //nastojato
-             velikostTlacitka= window.innerWidth / 3.5;
-             document.getElementById("okno").style.width = window.screen.availWidth+"px";
-             document.getElementById("okno").style.height = window.screen.availHeight+"px";
-             document.getElementById("layout").style.width = window.screen.availWidth+"px";
-             document.getElementById("layout").style.height = window.screen.availHeight+"px";
-             document.getElementById("layout").style.verticalAlign = "middle";
-           }
+             velikostTlacitka= window.screen.availWidth / 3.5;
+           } 
            
           for(var i = 0; i < 12; i++){
               buttons[i].style.width = velikostTlacitka+"px";
@@ -64,6 +54,12 @@
               hrac = localStorage.getItem("hracDva");
               poleHracu.push(new Hrac(hrac));
           }
+          
+          document.getElementById("okno").style.width = window.screen.availWidth+"px";
+          document.getElementById("okno").style.height = window.screen.availHeight+"px";
+          document.getElementById("layout").style.width = window.screen.availWidth+"px";
+          document.getElementById("layout").style.height = window.screen.availHeight+"px";
+          document.getElementById("layout").style.verticalAlign = "middle"; 
     }
     
     /*
@@ -205,10 +201,10 @@
          buttons[i].addEventListener('touchstart', handleTouch);
     }
     
-    onCreate();
-    
+   // onCreate();
+    window.addEventListener("load", onCreate(),false);
     document.getElementById("hracNaRade").innerHTML='Hrac: '+poleHracu[aktualniHrac].jmeno;
     document.getElementById("hracBody").innerHTML='Body: '+poleHracu[aktualniHrac].pocetBodu;
       
-    
+
 }());
